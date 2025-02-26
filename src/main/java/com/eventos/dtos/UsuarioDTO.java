@@ -14,7 +14,8 @@ public class UsuarioDTO {
     private String perfil;
     private Boolean verificado;
 
-    public UsuarioDTO() {}
+    public UsuarioDTO() {
+    }
 
     public UsuarioDTO(Usuario usuario) {
         this.id = usuario.getId();
@@ -89,5 +90,9 @@ public class UsuarioDTO {
 
     public void setVerificado(Boolean verificado) {
         this.verificado = verificado;
+    }
+
+    public Usuario orElseThrow(Object usuárioNãoEncontrado) {
+        return null;
     }
 }

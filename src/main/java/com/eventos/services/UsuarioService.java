@@ -6,6 +6,8 @@ import com.eventos.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class UsuarioService {
 
@@ -46,6 +48,23 @@ public class UsuarioService {
         usuarioDTO.setDataNascimento(usuario.getDataNascimento());
         usuarioDTO.setPerfil(usuario.getPerfil());
         usuarioDTO.setVerificado(usuario.getVerificado());
+        return usuarioDTO;
+    }
+    public Usuario buscarUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Usuário não encontrado"));
+    }
+
+    public UsuarioDTO buscarUsuarioPorEmail(String email) {
+        return converterUsuarioParaUsuarioDTO(usuarioRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Usuário não encontrado")));
+    }
+    public UsuarioDTO atualizarUsuario(Long id, UsuarioDTO usuarioDTO) {
+        if(Objects.isNull(usuarioRepository.findById(id))) {
+            throw new IllegalArgumentException("Usuário não encontrado");
+        }
         return usuarioDTO;
     }
 }
