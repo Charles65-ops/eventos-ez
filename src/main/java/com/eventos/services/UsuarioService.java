@@ -59,12 +59,15 @@ public class UsuarioService {
     public UsuarioDTO buscarUsuarioPorEmail(String email) {
         return converterUsuarioParaUsuarioDTO(usuarioRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Usuário não encontrado")));
+                        new IllegalArgumentException("Campo id não informado")));
     }
     public UsuarioDTO atualizarUsuario(Long id, UsuarioDTO usuarioDTO) {
         if(Objects.isNull(usuarioRepository.findById(id))) {
             throw new IllegalArgumentException("Usuário não encontrado");
         }
         return usuarioDTO;
+    }
+
+    public void deletarUsuario(Long id) {
     }
 }

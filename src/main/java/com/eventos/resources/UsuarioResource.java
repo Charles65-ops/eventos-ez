@@ -33,4 +33,10 @@ public class UsuarioResource {
     public String atualizarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         return null;
     }
+
+    @DeleteMapping()
+    public ResponseEntity<Void> deletarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        usuarioService.deletarUsuario(usuarioDTO.getId());
+        return ResponseEntity.noContent().build();
+    }
 }
