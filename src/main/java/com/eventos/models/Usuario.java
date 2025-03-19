@@ -1,10 +1,11 @@
 package com.eventos.models;
 
 import com.eventos.dtos.UsuarioDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.eventos.enums.Perfil;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,20 +29,22 @@ public class Usuario {
     @Column(name = "data_nascimento")
     private Date dataNascimento;
 
-    private String perfil;
+    @Enumerated(EnumType.STRING)
+    private List<Perfil> perfis;
 
     private Boolean verificado;
 
     public Usuario() {}
 
-    public Usuario(Long id, String nome, String email, String senha, String cpf, Date dataNascimento, String perfil, Boolean isVerificado) {
+    public Usuario(Long id, String nome, String email, String senha, String cpf,
+                   Date dataNascimento, List<Perfil> perfis, Boolean isVerificado) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
-        this.perfil = perfil;
+        this.perfis = perfis;
         this.verificado =verificado;
     }
 
@@ -52,7 +55,7 @@ public class Usuario {
         this.senha = usuarioDTO.getSenha();
         this.cpf = usuarioDTO.getCpf();
         this.dataNascimento = usuarioDTO.getDataNascimento();
-        this.perfil = usuarioDTO.getPerfil();
+        //this.perfil = usuarioDTO.getPerfil();
         this.verificado = usuarioDTO.getVerificado();
     }
 
@@ -104,12 +107,12 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getPerfil() {
-        return perfil;
+    public List<Perfil> getPerfis() {
+        return perfis;
     }
 
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setPerfis(List<Perfil> perfis) {
+        this.perfis = perfis;
     }
 
     public Boolean getVerificado() {

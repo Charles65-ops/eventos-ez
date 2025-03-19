@@ -1,29 +1,27 @@
 package com.eventos.models;
 
-import com.eventos.enums.Estado;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "cidades")
-public class Cidade {
-
+@Table(name = "produtoras")
+public class Produtora {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
 
-    @Enumerated(EnumType.STRING)
-    private Estado estado;
+    @Column(name = "cpf_cnpj", unique = true)
+    private String cpfCnpj;
 
-    public Cidade() {}
+    public Produtora() {}
 
-    public Cidade(Long id, String nome, Estado estado) {
+    public Produtora(Long id, String nome, String cpfCnpj) {
         this.id = id;
         this.nome = nome;
-        this.estado = estado;
+        this.cpfCnpj = cpfCnpj;
     }
 
     public Long getId() {
@@ -42,23 +40,24 @@ public class Cidade {
         this.nome = nome;
     }
 
-    public Estado getEstado() {
-        return estado;
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Cidade cidade = (Cidade) o;
-        return Objects.equals(id, cidade.id);
+        Produtora produtora = (Produtora) o;
+        return Objects.equals(id, produtora.id) && Objects.equals(nome, produtora.nome) && Objects.equals(cpfCnpj, produtora.cpfCnpj);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id, nome, cpfCnpj);
     }
 }
+

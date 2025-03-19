@@ -1,7 +1,7 @@
 package com.eventos.enums;
 
 public enum Perfil {
-    ADMINISTRADDOR("Administrador","Adm"),
+    ADMINISTRADOR("Administrador","Adm"),
     GERENTE("Gerente","Ger"),
     USUARIO("Usuário","Urs");;
 
